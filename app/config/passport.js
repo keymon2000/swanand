@@ -26,12 +26,10 @@ function init(passport) {
         done(null, user._id)
     })
 
-    passport.deserializeUser((id, done) => {
-        let user=User.findById(id);
+    passport.deserializeUser(async (id, done) => {
+        let user=null;
+        user= await User.findById(id);
         done(null, user);
-        // User.findById(id, (err, user) => {
-        //     done(err, user)
-        // })
     })
 }
 

@@ -10,6 +10,9 @@ const session = require('express-session')
 const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo')
 const passport = require('passport')
+const bodyParser = require("body-parser")
+
+
 
 
 
@@ -53,7 +56,7 @@ app.use(passport.session())
 app.use(flash())
 //Assets
 app.use(express.static('public'))
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json()) 
 
 //Global middleware
