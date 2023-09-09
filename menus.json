@@ -1,0 +1,65 @@
+[{
+  "_id": {
+    "$oid": "5eee651f739f8c674fd736ee"
+  },
+  "name": "A2 Milk",
+  "image": "milk.png",
+  "price": "40",
+  "size": "500 ml"
+},{
+  "_id": {
+    "$oid": "5eee6671a27a66807cf2bea3"
+  },
+  "name": "A2 Milk",
+  "image": "milk.png",
+  "price": "70",
+  "size": "1000 ml"
+},{
+  "_id": {
+    "$oid": "5eee6692a27a66807cf2bea4"
+  },
+  "name": "Desi Ghee",
+  "image": "ghee.png",
+  "price": "600",
+  "size": "0.5 KG"
+},{
+  "_id": {
+    "$oid": "5eee66a5a27a66807cf2bea5"
+  },
+  "name": "Desi Ghee",
+  "image": "ghee.png",
+  "price": "1100",
+  "size": "1 KG"
+},{
+  "_id": {
+    "$oid": "5eee66c4a27a66807cf2bea6"
+  },
+  "name": "Shrikhand",
+  "image": "shrikhand.png",
+  "price": "150",
+  "size": "0.5 KG"
+},{
+  "_id": {
+    "$oid": "5eee66cfa27a66807cf2bea7"
+  },
+  "name": "Shrikhand",
+  "image": "shrikhand.png",
+  "price": "300",
+  "size": "1 KG"
+},{
+  "_id": {
+    "$oid": "5eee66eea27a66807cf2bea8"
+  },
+  "name": "Amrakhand",
+  "image": "amrakhand.png",
+  "price": "180",
+  "size": "0.5 KG"
+},{
+  "_id": {
+    "$oid": "5eee6717a27a66807cf2bea9"
+  },
+  "name": "Amrakhand",
+  "image": "amrakhand.png",
+  "price": "180",
+  "size": "0.5 KG"
+}]

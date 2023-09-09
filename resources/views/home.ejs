@@ -14,7 +14,23 @@
     <section class="menu container mx-auto py-8">
         <h1 class="text-xl font-bold mb-8">All Products</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-16">
-                <div class="w-full md:w-64">
+            <% prods.forEach(function(product){ %>
+                 <div class="w-full md:w-64">
+                    <img class="h-40 mb-4 mx-auto" src="/img/<%= product.image%>" alt="">
+                    <div class="text-center"> 
+                        <h2 class="mb-4 text-lg"><%= product.name%></h2>
+                        <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= product.size%></span>
+                        <div class="flex items-center justify-around mt-6">
+                            <span class="font-bold text-lg">Rs <%= product.price%></span>
+                            <button data-prod="<%= JSON.stringify(product) %>" class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">              
+                                <span>+</span>                       
+                                <span class="ml-4">Add</span>
+                            </button> 
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+                <!-- <div class="w-full md:w-64">
                     <img class="h-40 mb-4 mx-auto" src="/img/milk.png" alt="">
                     <div class="text-center"> 
                         <h2 class="mb-4 text-lg">A2 Milk</h2>
@@ -27,6 +43,6 @@
                             </button> 
                         </div>
                     </div>
-                </div>
+                </div> -->
         </div>
     </section>
