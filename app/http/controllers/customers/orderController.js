@@ -18,8 +18,13 @@ function orderController(){
             })
             order.save().then((result) => {
                 req.flash('success', 'Order placed successfully');
-                delete req.session.cart;
-                return res.redirect('/customers/orders');
+                Order.populate(result, { path:'customerId' }).then((placedOrder)=>{
+                    delete req.session.cart;
+                    //emit
+                    const eventEmitter = req.app.get('eventEmitter')
+                    eventEmitter.emit('orderPlaced', placedOrder)
+                    return res.redirect('/customers/orders');
+                })
             }).catch(err => {
                 console.log(err);
                 return res.status(500).json({message:err});
@@ -32,6 +37,14 @@ function orderController(){
             res.header('Cache-Control', 'no-store')         //As we place the order, we are redirected to teh rders list page with the popup if order places successfully, nut if we move back and forward then again this message gets diaplayed so to remove in such cases we do this by removing the cache
             res.render('customers/orders', { orders: orders , moment: moment})
         },
+        async show(req, res) {
+            const order = await Order.findById(req.params.id)
+            //Authorise user
+            if(req.user._id.toString() === order.customerId.toString()) {
+                return res.render('customers/singleOrder', { order })
+            }
+            return res.redirect('/')
+        }
     }
 }
 module.exports=orderController;

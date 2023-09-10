@@ -2,7 +2,7 @@ import moment from 'moment'
 import axios from  'axios'
 import Noty from 'noty'
 
-export function initAdmin() {
+export function initAdmin(socket) {
     const orderTableBody = document.querySelector('#orderTableBody')
     let orders = []
     let markup
@@ -80,15 +80,15 @@ export function initAdmin() {
         }).join('')
     }
 
-    // socket.on('orderPlaced', (order) => { 
-    //     orders.unshift(order)                                       //adds element ot teh begining or orders array
-    //     orderTableBody.innerHTML = ''                               //remove the previous table in admin status
-    //     orderTableBody.innerHTML = generateMarkup(orders)           //Updat the new array there 
-    //     new Noty({
-    //         type: 'success',
-    //         timeout: 1000,
-    //         text: 'New order!',
-    //         progressBar: false,
-    //     }).show();                     
-    // })
+    socket.on('orderPlaced', (order) => { 
+        orders.unshift(order)                                       //adds element ot teh begining or orders array
+        orderTableBody.innerHTML = ''                               //remove the previous table in admin status
+        orderTableBody.innerHTML = generateMarkup(orders)           //Updat the new array there 
+        new Noty({
+            type: 'success',
+            timeout: 1000,
+            text: 'New order!',
+            progressBar: false,
+        }).show();                     
+    })
 }

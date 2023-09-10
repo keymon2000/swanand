@@ -10,8 +10,7 @@ const session = require('express-session')
 const flash = require('express-flash')
 const MongoDbStore = require('connect-mongo')
 const passport = require('passport')
-const bodyParser = require("body-parser")
-
+const Emitter = require('events')
 
 
 
@@ -31,6 +30,10 @@ const connection = mongoose.connection;
       console.log(err);
     });
  
+ //Evenyt Emitter
+const eventEmitter = new Emitter()
+app.set('eventEmitter', eventEmitter)               //to access any event on frontend to any of the file in backend   
+
  //session config
  app.use(session({                                  //to generate cookies. Upon each request from http, server sees if the client already has a cookie, if so then it directly goes to taht id of the cookie stored in its database and if not the generates a uniques cookie fro the first time we make the request
   secret: process.env.COOKIE_SECRET,
@@ -74,6 +77,23 @@ app.set('view engine','ejs');
 
 require('./api/web')(app);
 
-app.listen(PORT,()=>{
-    console.log(`Listening on PORT ${PORT}`);
+const server = app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`)
+})
+
+//Socket
+const io = require('socket.io')(server)                 //real time update on placing order and changing the status of order
+io.on('connection', (socket) => {
+  // Join private room
+  socket.on('join', (orderId) => {
+      socket.join(orderId)
+  })
+})
+
+eventEmitter.on('orderUpdated', (data) => {                     //update the status of the order in real time
+  io.to(`order_${data.id}`).emit('orderUpdated', data)
+})
+
+eventEmitter.on('orderPlaced', (data) => {                      //Update a new order on admin page in real time
+  io.to('adminRoom').emit('orderPlaced', data)
 })
