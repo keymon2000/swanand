@@ -17,7 +17,7 @@ const Emitter = require('events')
 
 
 //database connection
-mongoose.connect(process.env.MONGO_CONNECTION_URL, {
+mongoose.connect("monogdb://myUserAdmin:abc123@127.0.0.1:27017/swanand?authSource=admin", {
    useNewUrlParser: true, 
    useUnifiedTopology: true
 });
@@ -39,7 +39,7 @@ app.set('eventEmitter', eventEmitter)               //to access any event on fro
   secret: process.env.COOKIE_SECRET,
   resave: false,
   store: MongoDbStore.create({                    //for the cookie, if storage not given then stores cookies by default in ram memory
-    mongoUrl: process.env.MONGO_CONNECTION_URL
+    mongoUrl: "monogdb://myUserAdmin:abc123@127.0.0.1:27017/swanand?authSource=admin"
   }),
   saveUninitialized: false,
   cookie: { maxAge: 1000 * 60 * 60 * 24 } //24hrs
