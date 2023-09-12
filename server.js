@@ -76,6 +76,10 @@ app.set('views',path.join(__dirname,'/resources/views'));
 app.set('view engine','ejs');
 
 require('./api/web')(app);
+app.use((req, res) => {
+  res.status(404).render('errors/404')
+})
+
 
 const server = app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`)
